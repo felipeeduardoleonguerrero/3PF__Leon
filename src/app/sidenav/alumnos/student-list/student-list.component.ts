@@ -20,7 +20,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   displayedColumns=['student', 'email', 'country', 'info', 'edit', 'delete'];
 
-  displayedColumns2=['course'];
+  displayedColumns2=['name', 'email'];
 
   public studentDetails:any;
 
@@ -70,9 +70,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   //Este método abre el modal de detalles (botón de información).
 
   openDialog(details:any){
-
     this.studentDetails = details;
-    this.detailsData = new MatTableDataSource(details.course);
     let dialogRef = this.dialog.open(this.detail, { disableClose: false });
     dialogRef.afterClosed().subscribe((result) => { });
 

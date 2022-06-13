@@ -52,20 +52,16 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-
+<!--Modal con detalles-->
 
 <ng-template #detail>
 
-  <table mat-table [dataSource]="detailsData" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="course">
-      <th mat-header-cell *matHeaderCellDef>Cursos</th>
-      <td mat-cell *matCellDef="let element"> {{element}} </td>
-    </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
-  </table>
+  <div>
+    <p><em>Más detalles de:</em></p>
+    <h3>{{studentDetails.studentName}} {{studentDetails.studentSurname}}</h3>
+    <hr><br>
+    <p><em>Cursos:</em> {{studentDetails.course}}</p>
+  </div>
 
 </ng-template>
 

@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StudentsService } from 'src/app/services/students.service';
@@ -11,15 +12,23 @@ import { StudentsService } from 'src/app/services/students.service';
 })
 export class CoursesListComponent implements OnInit {
 
+  @ViewChild('detail') detail: TemplateRef<any>;
+
   courses:any;
 
   subscriptions: Subscription;
 
-  displayedColumns=['course', 'cost', 'edit', 'delete']
+  displayedColumns=['course', 'info', 'edit', 'delete'];
+
+  displayedColumns2=['name', 'cost'];
+
+  public courseDetails:any;
+
+  public detailsData: MatTableDataSource<any>;
 
   @ViewChild('table') table: MatTable<any>;
 
-  constructor(private router:Router, private studentsService:StudentsService) { }
+  constructor(private router:Router, private studentsService:StudentsService, public dialogDetails: MatDialog, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     
@@ -56,6 +65,15 @@ export class CoursesListComponent implements OnInit {
     this.courses.splice(index,1);
     this.table.renderRows();
     this.studentsService.coursesList=this.courses!;
+
+  }
+
+  //Este método abre el modal de detalles (botón de información).
+
+  openDialog(details:any){
+    this.courseDetails = details;
+    let dialogRef = this.dialog.open(this.detail, { disableClose: false });
+    dialogRef.afterClosed().subscribe((result) => { });
 
   }
 

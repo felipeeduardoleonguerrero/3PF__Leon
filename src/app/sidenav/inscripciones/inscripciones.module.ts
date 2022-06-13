@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InscripcionesComponent } from './inscripciones.component';
 import { InscripcionesRoutingModule } from './inscripciones-routing.module';
 
+//Módulo que sirve a la lista de inscripciones y sus registros
 
 @NgModule({
   declarations: [

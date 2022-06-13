@@ -7,7 +7,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CursosRoutingModule } from './cursos-routing.module';
 
-
+//Módulo que sirve a la lista de cursos y sus registros
 
 @NgModule({
   declarations: [

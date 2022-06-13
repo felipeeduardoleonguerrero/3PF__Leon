@@ -8,7 +8,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-///import { AlumnosModule } from './sidenav/alumnos/alumnos.module';
 import { AppRoutingModule } from './app-routing.module';
 import { StudentsModule } from './sidenav/sidenav.module';
 
@@ -30,7 +29,6 @@ const appRoutes=[
     RouterModule.forRoot(appRoutes),
     CommonModule,
     BrowserModule,
-    //AlumnosModule
     StudentsModule
     
   ],

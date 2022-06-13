@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { delay, filter, from, fromEvent, map, Observable, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { StudentsService } from 'src/app/services/students.service';
 
 @Component({
@@ -44,11 +44,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
       )
     )
-
-    /*this.studentsTwo.pipe(
-      filter((char)=>char! == ' '),
-      map((char)=>char.toUpperCase())
-    )*/
   }
 
   addStudent(){
@@ -72,11 +67,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.studentsService.studentsList=this.students!;
   }
 
-  //delayDatum(val:any): Promise<any>{
-  //  return new Promise((resolve,reject)=>{
-  //    setTimeout(()=>resolve(val),2000)
-  //  })
-  //}
+  //Este método abre el modal de detalles (botón de información).
 
   openDialog(details:any){
 
@@ -84,8 +75,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.detailsData = new MatTableDataSource(details.course);
     let dialogRef = this.dialog.open(this.detail, { disableClose: false });
     dialogRef.afterClosed().subscribe((result) => { });
-
-    //this.dialogDetails.open(DialogElements, {});
 
   }
 

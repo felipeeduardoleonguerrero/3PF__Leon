@@ -28,6 +28,7 @@
   </mat-form-field>
 
   <button [disabled]="studentForm.invalid" mat-raised-button color="accent" type="submit">Enviar</button>
-
-  <!--a class="cancel-link" [routerLink]="'/home/students/list'">Cancelar</a-->
+  
 </form>
+
+  <a class="cancel-link" [routerLink]="'/home/students/list'" (click)="goBack()">Cancelar</a>

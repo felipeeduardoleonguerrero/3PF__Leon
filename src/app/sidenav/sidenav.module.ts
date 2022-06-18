@@ -9,6 +9,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AlumnosModule } from './alumnos/alumnos.module';
 import { CursosModule } from './cursos/cursos.module';
 import { InscripcionesModule } from './inscripciones/inscripciones.module';
+import { HttpClientModule } from '@angular/common/http';
 
 //Este módulo sirve de módulo principal a los módulos principales de alumnos, cusos e inscripciones
 
@@ -24,7 +25,8 @@ import { InscripcionesModule } from './inscripciones/inscripciones.module';
     MaterialModule,
     AlumnosModule,
     CursosModule,
-    InscripcionesModule
+    InscripcionesModule,
+    HttpClientModule
   ],
   exports: [
     AlumnosComponent

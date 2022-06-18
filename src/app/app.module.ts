@@ -10,10 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { StudentsModule } from './sidenav/sidenav.module';
-
-const appRoutes=[
-  {path: 'students', loadChildren: ()=>import('./sidenav/sidenav.module').then(m=>m.StudentsModule) } 
-]
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -26,10 +23,10 @@ const appRoutes=[
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
     CommonModule,
     BrowserModule,
-    StudentsModule
+    StudentsModule,
+    CoreModule
     
   ],
   providers: [],

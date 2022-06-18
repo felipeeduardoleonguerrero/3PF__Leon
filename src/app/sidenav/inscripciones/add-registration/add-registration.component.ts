@@ -91,6 +91,7 @@ export class AddRegistrationComponent implements OnInit, OnDestroy {
     if (this.studentToEdit) {
         let indexOfStudent = students.findIndex((student)=>student.id===this.studentToEdit.id);
        students[indexOfStudent]=this.registrationForm.value;
+       this.studentsService.studentToEdit=null;
     }
 
     //Igualamos students con studentsList (students.servivce). ! (null assertion value) avisa a Angular que el valor no será igual a null.
@@ -102,6 +103,10 @@ export class AddRegistrationComponent implements OnInit, OnDestroy {
   /*cancelRegistration() {
     this.router.navigate(["home/registration/list"]);
   }*/
+
+  goBack () {
+    this.studentsService.studentToEdit=null;
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

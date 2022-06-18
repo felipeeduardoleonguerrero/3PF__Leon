@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Students } from './students';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class StudentsService {
+
+  //En caso de falso, el usuario no puede navegar el sitio.
+
+  loggedIn = false;
+
+  //MOCKAPI
+
+  rootUrl="https://62a7cf5197b6156bff933692.mockapi.io/api/v1/students/";
   
   //Arreglo con todos los estudiantes
   studentsList:any=[
@@ -76,13 +86,14 @@ export class StudentsService {
 
   courseToEdit:any;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  //Uso de Observable
+  //Lista de estudiantes desde la MOCKAPI
 
   getStudentsList():Observable<any> {
+    return this.http.get<any>(this.rootUrl);
 
-    return of(this.studentsList);
+    //return of(this.studentsList);
 
   }
 
@@ -104,6 +115,30 @@ export class StudentsService {
 
   getCourseToEdit():Observable<any> {
     return of(this.courseToEdit);
+  }
+
+  //Adición de estudiante: Uso de MOCKAPI
+
+  postStudent(student:any):Observable<Students> {
+    return this.http.post<Students>(this.rootUrl, student);
+  }
+
+  //Actualización de estudiante: Uso de MOCKAPI
+
+  updateStudent(student:Students):Observable<Students>{
+    return this.http.put<Students>(this.rootUrl + `/${student.id}`, student)
+  }
+  
+  //Eliminación de estudiante: Uso de MOCKAPI
+
+  removeStudent(id:number):Observable<Students> {
+    return this.http.delete<Students>(this.rootUrl + id);
+  }
+
+  //Autenticación del usuario. En caso contrario los Guards bloquearan el acceso al resto del sitio.
+  
+  logIn() {
+    this.loggedIn = true;
   }
 
 }

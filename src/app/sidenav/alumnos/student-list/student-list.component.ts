@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Students } from 'src/app/services/students';
 import { StudentsService } from 'src/app/services/students.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   @ViewChild('detail') detail: TemplateRef<any>;
 
-  students:any;
+  students:Students[];
 
   subscriptions: Subscription;
 
@@ -35,13 +36,17 @@ export class StudentListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.subscriptions=new Subscription();
-    
-    //Suscripción a un servicio con observable
+
+    this.getStudents();
+
+  }
+
+  getStudents(){
     this.subscriptions.add(
       this.studentsService.getStudentsList().subscribe(
-
-        (val)=>this.students=val
-
+        (data)=>{
+          this.students=data;
+        }
       )
     )
   }
@@ -58,13 +63,14 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteStudent(el:any){
+//Eliminación de estudiante
 
-    //Eliminación de estudiante
-    let index = this.students.findIndex((student: { id: any; })=> student.id===el.id);
-    this.students.splice(index,1);
-    this.table.renderRows();
-    this.studentsService.studentsList=this.students!;
+  deleteStudent(id:number){
+    this.studentsService.removeStudent(id).subscribe(
+      (data)=>{
+        this.getStudents();
+      }
+    )
   }
 
   //Este método abre el modal de detalles (botón de información).

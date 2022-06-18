@@ -48,6 +48,6 @@
 
   <button [disabled]="registrationForm.invalid" mat-raised-button color="accent" type="submit">Enviar</button>
 
-  <!--a class="cancel-link" (click)="cancelRegistration()">Cancelar</a-->
+  <a class="cancel-link" [routerLink]="'/home/registration/list'" (click)="goBack()">Cancelar</a>
 
 </form>

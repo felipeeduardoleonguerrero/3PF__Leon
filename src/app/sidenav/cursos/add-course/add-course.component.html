@@ -24,6 +24,6 @@
 
   <button [disabled]="coursesForm.invalid" mat-raised-button color="accent" type="submit">Enviar</button>
 
-  <!--a class="cancel-link" [routerLink]="'/home/courses/list'">Cancelar</a-->
-
 </form>
+
+<a class="cancel-link" [routerLink]="'/home/courses/list'" (click)="goBack()">Cancelar</a>

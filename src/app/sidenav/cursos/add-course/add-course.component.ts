@@ -87,12 +87,17 @@ export class AddCourseComponent implements OnInit, OnDestroy {
     if (this.courseToEdit) {
         let indexOfCourse = courses.findIndex((course)=>course.id===this.courseToEdit.id);
        courses[indexOfCourse]=this.coursesForm.value;
+       this.studentsService.courseToEdit=null;
     }
 
     //Igualamos courses con coursesList (students.servivce). ! (null assertion value) avisa a Angular que el valor no será igual a null.
 
     this.studentsService.coursesList=courses!;
     this.router.navigate(["home/courses/list"]);
+  }
+
+  goBack () {
+    this.studentsService.courseToEdit=null;
   }
 
   ngOnDestroy(): void {

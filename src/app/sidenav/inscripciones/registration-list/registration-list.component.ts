@@ -18,7 +18,7 @@ export class RegistrationListComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription;
 
-  displayedColumns=['student', 'course', 'info', 'period', 'edit'];
+  displayedColumns=['student', 'course', 'period', 'info', 'edit'];
 
   public studentDetails:any;
 

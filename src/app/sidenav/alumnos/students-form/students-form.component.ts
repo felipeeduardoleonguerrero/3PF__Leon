@@ -34,6 +34,7 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
     })
 
     //Uso del observable en StudentsService para editar al estudiante
+    
     this.subscriptions.add(
       this.studentsService.getStudentToEdit().subscribe(
         val=>this.studentToEdit=val
@@ -54,47 +55,30 @@ export class StudentsFormComponent implements OnInit, OnDestroy {
 
   onSubmit(){
 
-    //Evalúa si el elemento se añade o edita. Si se añade, emite editedItem. Si se edita emite el itemEdited.
-
-    // Se declara students para no mutar directamente a studentsList (students.service).
-    let students=[];
-
-    //Suscripción a un servicio con observable
-    this.subscriptions.add(
-      this.studentsService.getStudentsList().subscribe(
-
-        val=>students=val
-
-      )
-    )
-
-    //Generamos un id para el nuevo estudiante. Si no hay estudiantes, el índice del nuevo estudiante será igual a index (1).
+    const student = this.studentForm.value;
     
-    let index=1;
-
-    if (students.length>0 && !this.studentToEdit) {
-
-      index=students.length+1;
-      this.studentForm.value['id']=index;
-      students.push(this.studentForm.value);
-
-    } else if (students.length===0 && !this.studentToEdit){
-
-      this.studentForm.value['id']=index;
-      students.push(this.studentForm.value)
-
+    //Actualizar o actualizar al estudiante a la MOCKAPI
+    
+    if(!this.studentToEdit){
+      this.studentsService.postStudent(student).subscribe(
+      (val)=>{
+          this.router.navigate(['/home/students/list'])
+        }
+      )
+    } else {
+      student['id']=this.studentToEdit.id;
+      this.studentsService.updateStudent(student).subscribe(
+        (val)=>{
+          this.studentsService.studentToEdit=null;
+          this.router.navigate(['/home/students/list'])
+        }
+      )
     }
 
-    //Actualizamos al estudiante encontrando su id.
+  }
 
-    if (this.studentToEdit) {
-        let indexOfStudent = students.findIndex((student)=>student.id===this.studentToEdit.id);
-       students[indexOfStudent]=this.studentForm.value;
-    }
-
-    //Igualamos students con studentsList (students.servivce). ! (null assertion value) avisa a Angular que el valor no será igual a null.
-    this.studentsService.studentsList=students!;
-    this.router.navigate(["home/students/list"]);
+  goBack () {
+    this.studentsService.studentToEdit=null;
   }
 
   ngOnDestroy(): void {

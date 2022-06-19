@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { StudentsModule } from './sidenav/sidenav.module';
 import { CoreModule } from './core/core.module';
+import { SidenavRoutingModule } from './sidenav/sidenav-routing.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CoreModule } from './core/core.module';
     CommonModule,
     BrowserModule,
     StudentsModule,
-    CoreModule
+    CoreModule,
+    SidenavRoutingModule
     
   ],
   providers: [],

@@ -10,6 +10,9 @@ import { AlumnosModule } from './alumnos/alumnos.module';
 import { CursosModule } from './cursos/cursos.module';
 import { InscripcionesModule } from './inscripciones/inscripciones.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AlumnosRoutingModule } from './alumnos/alumnos-routing.module';
+import { CursosRoutingModule } from './cursos/cursos-routing.module';
+import { InscripcionesRoutingModule } from './inscripciones/inscripciones-routing.module';
 
 //Este módulo sirve de módulo principal a los módulos principales de alumnos, cusos e inscripciones
 
@@ -26,7 +29,11 @@ import { HttpClientModule } from '@angular/common/http';
     AlumnosModule,
     CursosModule,
     InscripcionesModule,
-    HttpClientModule
+    HttpClientModule,
+    AlumnosRoutingModule,
+    CursosRoutingModule,
+    InscripcionesRoutingModule
+
   ],
   exports: [
     AlumnosComponent

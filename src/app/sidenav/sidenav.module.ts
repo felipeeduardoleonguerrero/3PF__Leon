@@ -22,8 +22,7 @@ import { UsersComponent } from './users/users.component';
   declarations: [
     SidenavComponent,
     AlumnosComponent,
-    WelcomeComponent,
-    UsersComponent
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

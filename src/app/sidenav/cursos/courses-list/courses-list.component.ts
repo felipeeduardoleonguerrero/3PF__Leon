@@ -25,6 +25,8 @@ export class CoursesListComponent implements OnInit {
 
   allRegistrations:any;
 
+  registrationToEdit:any;
+
   subscriptions: Subscription;
 
   displayedColumns=['course', 'info', 'edit', 'delete'];
@@ -100,25 +102,23 @@ export class CoursesListComponent implements OnInit {
 
   openDialog(details:any){
 
-    //Trae el objeto del curso desde la tabla de detalles.
+    //Trae el objeto/fila del curso desde la tabla de detalles.
     this.courseDetails = details;
 
     //Vacía el arreglo de inscripciones al mismo curso (inicializar detalles).
-    // this.registrations=[];
+    this.registrations=[];
 
-    // this.allRegistrations.map(registration => {
+    this.registration.map((singleRegistration: { course: any; }) => {
 
-    //   if (registration.id == this.courseDetails.id) {
+      if (singleRegistration.course === this.courseDetails.course) {
 
-    //     this.registrations.push(registrationToRemove);
+        this.registrations.push(singleRegistration);
         
-    //   }
-    // })
+      }
+    })
 
     let dialogRef = this.dialog.open(this.detail, { disableClose: false });
     dialogRef.afterClosed().subscribe((result) => { });
-
-
 
   }
 

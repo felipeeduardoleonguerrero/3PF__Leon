@@ -6,12 +6,14 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { UsersFormComponent } from './users-form/users-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/modules/material.module';
+import { UsersComponent } from './users.component';
 
 
 @NgModule({
   declarations: [
     UsersListComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    UsersComponent
     
   ],
   imports: [

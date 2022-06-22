@@ -30,7 +30,8 @@ const routes: Routes = [
     },
     {path: 'students', loadChildren: ()=>import('./sidenav/alumnos/alumnos.module').then(m=>m.AlumnosModule) },
     {path: 'courses', loadChildren: ()=>import('./sidenav/cursos/cursos.module').then(m=>m.CursosModule) },
-    {path: 'registration', loadChildren: ()=>import('./sidenav/inscripciones/inscripciones.module').then(m=>m.InscripcionesModule) }
+    {path: 'registration', loadChildren: ()=>import('./sidenav/inscripciones/inscripciones.module').then(m=>m.InscripcionesModule) },
+    {path: 'users', loadChildren: ()=>import('./sidenav/users/users.module').then(m=>m.UsersModule) }
   ]},
   {path: '', redirectTo: 'home/login', pathMatch:'full'},
   {path: '**', component:PageNotFoundComponent}

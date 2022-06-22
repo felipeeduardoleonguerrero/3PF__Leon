@@ -9,11 +9,7 @@ import { Students } from './students';
 
 export class StudentsService {
 
-  //En caso de falso, el usuario no puede navegar el sitio.
-
-  loggedIn = false;
-
-  //MOCKAPI
+  //MOCKAPI Estudiantes
 
   rootUrl="https://62a7cf5197b6156bff933692.mockapi.io/api/v1/students/";
   
@@ -133,12 +129,6 @@ export class StudentsService {
 
   removeStudent(id:number):Observable<Students> {
     return this.http.delete<Students>(this.rootUrl + id);
-  }
-
-  //Autenticación del usuario. En caso contrario los Guards bloquearan el acceso al resto del sitio.
-  
-  logIn() {
-    this.loggedIn = true;
   }
 
 }

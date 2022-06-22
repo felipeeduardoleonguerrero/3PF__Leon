@@ -17,6 +17,9 @@
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
        <mat-icon>{{asyncShare | async}}</mat-icon>
      </button>
+     <button mat-icon-button class="example-icon" aria-label="Logout" (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+    </button>
     </mat-toolbar-row>
   </mat-toolbar>
   

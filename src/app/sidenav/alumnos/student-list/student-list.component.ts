@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Students } from 'src/app/services/students';
 import { StudentsService } from 'src/app/services/students.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-student-list',
@@ -19,7 +20,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription;
 
-  displayedColumns=['student', 'email', 'country', 'info', 'edit', 'delete'];
+  displayedColumns:any;
 
   displayedColumns2=['name', 'email'];
 
@@ -27,9 +28,11 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   public detailsData: MatTableDataSource<any>;
 
+  adminStatus:boolean;
+
   @ViewChild('table') table: MatTable<any>;
 
-  constructor(private router:Router, private studentsService:StudentsService, public dialogDetails: MatDialog, private dialog: MatDialog) {
+  constructor(private router:Router, private studentsService:StudentsService, public dialogDetails: MatDialog, private dialog: MatDialog, private usersService:UsersService) {
     this.detailsData = new MatTableDataSource();
    }
 
@@ -39,7 +42,26 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
     this.getStudents();
 
+    this.subscriptions.add(
+      this.usersService.adminStatus().subscribe(
+        (data)=>{
+          this.adminStatus=data;
+        }
+      )
+    )
+
+    
+
+  if (this.adminStatus) {
+    this.displayedColumns = ['student', 'email', 'country', 'info', 'edit', 'delete'];
+    
+  } else {  
+    this.displayedColumns = ['student', 'email', 'country', 'delete'];
   }
+
+
+  }
+
 
   getStudents(){
     this.subscriptions.add(

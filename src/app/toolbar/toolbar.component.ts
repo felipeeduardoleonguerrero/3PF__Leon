@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { delay, Observable, of, Subscription } from 'rxjs';
 import { ToolbarButtonsService } from '../services/toolbar-buttons.service';
+import { UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -22,7 +24,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   shareButton:any;
 
-  constructor(private toolbarButtonsService:ToolbarButtonsService) {}
+  constructor(private toolbarButtonsService:ToolbarButtonsService, private usersService: UsersService, private router:Router) {}
 
   ngOnInit(): void {
 
@@ -55,6 +57,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   shareObservable(val:string) {
     return of (val).pipe(delay(4000))
+  }
+
+  logOut(){
+    this.usersService.signOut();
+    this.router.navigate(["home/login"]);
   }
 
   ngOnDestroy(): void {

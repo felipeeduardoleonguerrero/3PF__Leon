@@ -108,9 +108,12 @@ export class CoursesListComponent implements OnInit {
     //Vacía el arreglo de inscripciones al mismo curso (inicializar detalles).
     this.registrations=[];
 
-    this.registration.map((singleRegistration: { course: any; }) => {
+    //console.log(this.registration);
+    //console.log(this.courseDetails);
 
-      if (singleRegistration.course === this.courseDetails.course) {
+    this.registration.map((singleRegistration: any) => {
+
+      if (singleRegistration.course === this.courseDetails.name) {
 
         this.registrations.push(singleRegistration);
         

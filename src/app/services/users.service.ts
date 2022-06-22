@@ -10,9 +10,9 @@ export class UsersService {
 
   //En caso de falso, el usuario no puede navegar el sitio.
 
-  adminLoggedIn = true;
+  adminLoggedIn = false;
 
-  userLoggedIn = true;
+  userLoggedIn = false;
 
   //MOCKAPI Usuarios
 

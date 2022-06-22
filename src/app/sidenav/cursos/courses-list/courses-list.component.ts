@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RegistrationService } from 'src/app/services/registration.service';
 import { StudentsService } from 'src/app/services/students.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -27,11 +28,13 @@ export class CoursesListComponent implements OnInit {
 
   registrationToEdit:any;
 
+  registrationList:any;
+
   subscriptions: Subscription;
 
-  displayedColumns=['course', 'info', 'edit', 'delete'];
+  displayedColumns:any;
 
-  displayedColumnsTwo = ['student', 'course', 'delete'];
+  displayedColumnsTwo:any;
 
   public courseDetails:any;
 
@@ -39,7 +42,9 @@ export class CoursesListComponent implements OnInit {
 
   @ViewChild('table') table: MatTable<any>;
 
-  constructor(private router:Router, private studentsService:StudentsService, public dialogDetails: MatDialog, private dialog: MatDialog, private registrationService:RegistrationService) { }
+  adminStatus:boolean;
+
+  constructor(private router:Router, private studentsService:StudentsService, public dialogDetails: MatDialog, private dialog: MatDialog, private registrationService:RegistrationService, private usersService:UsersService) { }
 
   ngOnInit(): void {
     
@@ -72,6 +77,36 @@ export class CoursesListComponent implements OnInit {
       )
     )
 
+    this.getRegistration();
+
+    this.subscriptions.add(
+      this.usersService.adminStatus().subscribe(
+        (data)=>{
+          this.adminStatus=data;
+        }
+      )
+    )
+    
+
+    if (this.adminStatus) {
+      this.displayedColumns = ['course', 'info', 'edit', 'delete'];
+      this.displayedColumnsTwo = ['student', 'course', 'delete'];
+      
+    } else {  
+      this.displayedColumns =['course', 'info'];
+      this.displayedColumnsTwo = ['student', 'course'];
+    }
+
+  }
+
+  getRegistration(){
+    this.subscriptions.add(
+      this.registrationService.getRegistrationList().subscribe(
+        (data)=>{
+          this.registrationList=data;
+        }
+      )
+    )
   }
   
   addCourse() {
@@ -131,6 +166,16 @@ export class CoursesListComponent implements OnInit {
   //   dialogRef.afterClosed().subscribe((result) => { });
 
   // }
+
+//Eliminación de inscripción
+
+  deleteRegistration(id:number){
+    this.registrationService.removeRegistration(id).subscribe(
+      (data)=>{
+        this.getRegistration();
+      }
+    )
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

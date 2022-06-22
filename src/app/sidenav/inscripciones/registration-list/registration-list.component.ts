@@ -4,6 +4,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StudentsService } from 'src/app/services/students.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-registration-list',
@@ -18,7 +19,7 @@ export class RegistrationListComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription;
 
-  displayedColumns=['student', 'course', 'period', 'info', 'edit'];
+  displayedColumns:any;
 
   public studentDetails:any;
 
@@ -26,7 +27,9 @@ export class RegistrationListComponent implements OnInit, OnDestroy {
 
   @ViewChild('table') table: MatTable<any>;
 
-  constructor(private router:Router, private studentsService:StudentsService, public dialogDetails: MatDialog, private dialog: MatDialog) {}
+  adminStatus:boolean;
+
+  constructor(private router:Router, private studentsService:StudentsService, public dialogDetails: MatDialog, private dialog: MatDialog, private usersService:UsersService) {}
 
   ngOnInit(): void {
 
@@ -40,6 +43,23 @@ export class RegistrationListComponent implements OnInit, OnDestroy {
 
       )
     )
+
+    this.subscriptions.add(
+      this.usersService.adminStatus().subscribe(
+        (data)=>{
+          this.adminStatus=data;
+        }
+      )
+    )
+
+    
+
+  if (this.adminStatus) {
+    this.displayedColumns=['student', 'course', 'period', 'info', 'edit'];
+    
+  } else {  
+    this.displayedColumns=['student', 'course', 'period', 'info'];
+  }
   }
 
   addRegistration(){

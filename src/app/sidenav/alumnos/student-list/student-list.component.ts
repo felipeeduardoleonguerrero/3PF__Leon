@@ -56,7 +56,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.displayedColumns = ['student', 'email', 'country', 'info', 'edit', 'delete'];
     
   } else {  
-    this.displayedColumns = ['student', 'email', 'country', 'delete'];
+    this.displayedColumns = ['student', 'email', 'country'];
   }
 
 
